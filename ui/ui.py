@@ -1,4 +1,4 @@
-def display_ui(dataframe):
+def mostrar_datos_ui(dataframe):
     # Diccionario con los nuevos nombres de las columnas
     columnas_nuevas = {
         "ciudad_municipio_nom": "Ciudad",
