@@ -1,33 +1,33 @@
 import pandas as pd
 
 def inspeccionar_datos(df):
-    #Realiza una inspección general del DataFrame.
-    print("Número de filas::", df.shape[0])
-    print("Número de columnas::", df.shape[1])
-    print("Nombres de columnas::", df.columns.values.tolist())
-    print("Tipos de datos en columnas::\n", df.dtypes)
-
+    # Realiza una inspección general del DataFrame.
+    print("Número de filas:", df.shape[0])
+    print("Número de columnas:", df.shape[1])
+    print("Nombres de columnas:", df.columns.values.tolist())
+    print("Tipos de datos en columnas:\n", df.dtypes)
 
 def identificar_valores_nulos(df):
-    #Identifica valores nulos en el DataFrame.
-    print("Columns with Missing Values::", df.columns[df.isnull().any()].tolist())
-    print("Number of rows with Missing Values::", len(df[df.isnull().any(axis=1)]))
-    print("Sample Indices with missing data::", df[df.isnull().any(axis=1)].index.tolist()[0:5])
-
+    # Identifica columnas con valores nulos y muestra ejemplos.
+    cols_nulos = df.columns[df.isnull().any()].tolist()
+    print("Columnas con valores nulos:", cols_nulos)
+    filas_con_nulos = df[df.isnull().any(axis=1)]
+    print("Número de filas con valores nulos:", filas_con_nulos.shape[0])
+    print("Ejemplos de índices con datos nulos:", filas_con_nulos.index.tolist()[:5])
 
 def calcular_estadisticas(df):
-    #Calcula estadísticas descriptivas de las columnas numéricas.
-    print("General Stats::")
-    print(df.info())
-    print("Summary Stats::" )
+    # Calcula y muestra estadísticas descriptivas.
+    print("Información general:")
+    df.info()
+    print("Estadísticas descriptivas:")
     print(df.describe())
 
 def limpiar_datos(df):
-    #Elimina filas con valores nulos en la columna 'tipo_recuperacion'.
-    print("Eliminar filas con fechas faltantes::")
-    df_dropped = df.dropna(subset=['tipo_recuperacion'])
-    print("Forma del DataFrame::", df_dropped.shape)
-    return df_dropped
+    # Elimina filas con valores nulos en la columna 'Outcome'
+    print("Eliminando filas con valores nulos en 'Outcome'...")
+    df_limpio = df.dropna(subset=['Outcome'])
+    print("Forma del DataFrame después de limpiar:", df_limpio.shape)
+    return df_limpio
 
 def procesamiento_datos(df):
     inspeccionar_datos(df)

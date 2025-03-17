@@ -1,29 +1,30 @@
 def mostrar_datos_ui(dataframe):
-    # Diccionario con los nuevos nombres de las columnas
+    # Diccionario con los nuevos nombres para mayor claridad en la visualización
     columnas_nuevas = {
-        "ciudad_municipio_nom": "Ciudad",
-        "departamento_nom": "Departamento",
-        "edad": "Edad",
-        "fuente_tipo_contagio": "Tipo de Contagio",
-        "tipo_recuperacion": "Recuperación",
-        "estado": "Estado"
+        "Pregnancies": "Embarazos",
+        "Glucose": "Glucosa",
+        "BloodPressure": "Presión",
+        "SkinThickness": "Espesor Piel",
+        "Insulin": "Insulina",
+        "BMI": "IMC",
+        "DiabetesPedigreeFunction": "Pedigree",
+        "Age": "Edad",
+        "Outcome": "Resultado"
     }
 
-    # Crear una lista con los nuevos nombres de columnas
-    columnas = list(columnas_nuevas.values())
-
-    # Renombrar columnas temporalmente para la impresión
+    # Renombrar las columnas del DataFrame para la impresión
     dataframe = dataframe.rename(columns=columnas_nuevas)
 
-    # Encabezado con formato alineado
-    encabezado = "{:<20} {:<15} {:<5} {:<16} {:<10} {:<10}".format(*columnas)
-    print("=" * len(encabezado)) 
-    print(encabezado)
-    print("=" * len(encabezado))  # Línea separadora
+    # Crear una lista de columnas (los nuevos nombres) para el encabezado
+    columnas = list(columnas_nuevas.values())
 
-    # Insertar cada fila del DataFrame con formato
+    # Construir el encabezado con un formato fijo (ancho 15 para cada columna)
+    encabezado = "".join(["{:<15}".format(col) for col in columnas])
+    print("=" * len(encabezado))
+    print(encabezado)
+    print("=" * len(encabezado))
+    
+    # Imprimir cada fila del DataFrame formateada
     for _, row in dataframe.iterrows():
-        fila = "{:<20} {:<15} {:<5} {:<16} {:<10} {:<10}".format(
-            row["Ciudad"], row["Departamento"], row["Edad"], row["Tipo de Contagio"], row["Recuperación"], row["Estado"]
-        )
+        fila = "".join(["{:<15}".format(row[col]) for col in columnas])
         print(fila)
